@@ -1,0 +1,14 @@
+[package]
+name = "libkernel"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "kernel"
+path = "src/lib.rs"
+
+[features]
+default = ["kernel"]
+kernel = []
+
+[dependencies]

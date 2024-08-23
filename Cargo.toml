@@ -1,0 +1,17 @@
+[package]
+name = "rust-os"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "rust-os"
+path = "src/kernel/src/main.rs"
+
+[workspace]
+members = ["src/kernel"]
+
+[workspace.dependencies]
+libkernel = { path = "src/kernel", default-features = false }
+
+[dependencies]
+libkernel = { workspace = true, features = ["kernel"] }

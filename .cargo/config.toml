@@ -1,0 +1,20 @@
+[target.riscv64gc-unknown-none-elf]
+runner = """
+qemu-system-riscv64 -machine virt \
+-machine virt \
+-cpu rv64 \
+-bios none \
+-smp 4 \
+-m 128M \
+-serial mon:stdio \
+-device virtio-gpu-device \
+-device virtio-keyboard-device \
+-device virtio-net-device \
+-device virtio-rng-device \
+-device virtio-tablet-device \
+-nographic \
+-kernel 
+"""
+
+[build]
+target = "riscv64gc-unknown-none-elf"
