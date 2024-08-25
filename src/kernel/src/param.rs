@@ -1,1 +1,1 @@
-pub const NCPU: usize = 4; // maximum number of CPUs
+pub const NCPU: usize = 8; // maximum number of CPUs

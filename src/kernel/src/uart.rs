@@ -2,8 +2,6 @@ use core::fmt::{self, Write};
 
 use crate::{memlayout::UART_ADDR, spinlock::Mutex};
 
-pub static UART: Mutex<Uart> = Mutex::new(Uart {});
-
 pub struct Uart {}
 
 impl fmt::Write for Uart {
@@ -31,5 +29,6 @@ macro_rules! println {
 
 #[doc(hidden)]
 pub fn _print(args: fmt::Arguments) {
+    static UART: Mutex<Uart> = Mutex::new(Uart {});
     UART.lock().write_fmt(args).unwrap();
 }
