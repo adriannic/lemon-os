@@ -1,3 +1,4 @@
+//! This crate contains everything related to the kernel of the OS.
 #![no_std]
 #![no_main]
 

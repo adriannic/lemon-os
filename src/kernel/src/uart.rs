@@ -4,6 +4,7 @@ use crate::{memlayout::UART_ADDR, spinlock::Mutex};
 
 static UART: Mutex<Uart> = Mutex::new(Uart::new());
 
+/// Represents the [UART](https://en.wikipedia.org/wiki/Universal_asynchronous_receiver-transmitter) interface.
 #[derive(Default)]
 pub struct Uart {}
 

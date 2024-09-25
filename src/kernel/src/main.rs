@@ -14,6 +14,8 @@ const BANNER: &str = "
     ╚══════╝╚══════╝╚═╝     ╚═╝ ╚═════╝ ╚═╝  ╚═══╝       ╚═════╝ ╚══════╝
 ";
 
+/// The main function of the kernel. It's purpose is to initialise everything needed for the kernel
+/// to work correctly and jump to the scheduler when done.
 #[no_mangle]
 extern "C" fn main() -> ! {
     let id = tp::read();
@@ -35,6 +37,8 @@ extern "C" fn main() -> ! {
     }
 }
 
+/// Function in charge of handling unrecoverable errors in the kernel. Prints an error message
+/// detailing what the error is and where it ocurred before entering an infinite loop.
 #[panic_handler]
 fn panic(info: &PanicInfo) -> ! {
     // Print panics in red

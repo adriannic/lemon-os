@@ -7,12 +7,14 @@ use core::{
 
 use crate::riscv::registers::tp;
 
+/// Makes sure the value it contains is only accessed in mutual exclusion.
 #[derive(Debug)]
 pub struct Mutex<T> {
     locked: AtomicBool,  // Is the lock held?
     data: UnsafeCell<T>, // actual data
 }
 
+/// Represents the ownership of the lock. Allows access to the value inside the mutex.
 #[derive(Debug)]
 pub struct MutexGuard<'a, T: 'a> {
     mutex: &'a Mutex<T>,
@@ -20,6 +22,7 @@ pub struct MutexGuard<'a, T: 'a> {
 }
 
 impl<T> Mutex<T> {
+    /// Creates a new `Mutex` containing the value `value`.
     pub const fn new(value: T) -> Mutex<T> {
         Mutex {
             locked: AtomicBool::new(false),
@@ -27,6 +30,7 @@ impl<T> Mutex<T> {
         }
     }
 
+    /// Acquires the lock atomically.
     pub fn lock(&self) -> MutexGuard<'_, T> {
         while self
             .locked
@@ -41,6 +45,7 @@ impl<T> Mutex<T> {
         }
     }
 
+    /// Releases the lock explicitly.
     pub fn unlock(guard: MutexGuard<'_, T>) -> &'_ Mutex<T> {
         guard.mutex()
     }
@@ -49,16 +54,19 @@ impl<T> Mutex<T> {
 unsafe impl<T: Send> Sync for Mutex<T> {}
 
 impl<'a, T: 'a> MutexGuard<'a, T> {
+    /// Returns the `Mutex` this `MutexGuard` belongs to.
     pub fn mutex(&self) -> &'a Mutex<T> {
         self.mutex
     }
 
+    /// Checks if the current `hart` is holding the lock.
     pub fn holding(&self) -> bool {
         tp::read() == self.who
     }
 }
 
 impl<'a, T: 'a> Drop for MutexGuard<'a, T> {
+    /// Releases the lock implicitly.
     fn drop(&mut self) {
         assert!(
             self.holding(),
