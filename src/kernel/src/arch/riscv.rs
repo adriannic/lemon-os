@@ -93,7 +93,7 @@ pub mod registers {
         impl Sstatus {
             // Supervisor Interrupt Enable
             #[inline]
-            pub(in crate::riscv) fn sie(&self) -> bool {
+            pub(in crate::arch::riscv) fn sie(&self) -> bool {
                 self.bits & SIE != 0
             }
 
@@ -147,12 +147,12 @@ pub mod registers {
         }
 
         #[inline]
-        pub(in crate::riscv) unsafe fn set_sie() {
+        pub(in crate::arch::riscv) unsafe fn set_sie() {
             _set(SIE)
         }
 
         #[inline]
-        pub(in crate::riscv) unsafe fn clear_sie() {
+        pub(in crate::arch::riscv) unsafe fn clear_sie() {
             _clear(SIE)
         }
 

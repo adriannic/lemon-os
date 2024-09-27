@@ -1,4 +1,7 @@
-use crate::{memlayout::STACK_PAGE_NUM, param::NCPU, start::start};
+use crate::{
+    params::{NCPU, STACK_PAGE_NUM},
+    start::start,
+};
 use core::arch::asm;
 
 /// Struct representing the kernel's stack.

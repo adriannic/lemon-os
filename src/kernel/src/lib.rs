@@ -2,10 +2,10 @@
 #![no_std]
 #![no_main]
 
+pub mod arch;
 pub mod entry;
 pub mod memlayout;
-pub mod param;
-pub mod riscv;
+pub mod params;
 pub mod spinlock;
 pub mod start;
 pub mod uart;

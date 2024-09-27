@@ -1,6 +1,6 @@
 use core::{arch::asm, hint::unreachable_unchecked};
 
-use crate::riscv::registers::{
+use crate::arch::riscv::registers::{
     mepc, mhartid, mstatus, pmpaddr0,
     pmpcfg0::{self, Permission, Range},
     satp,

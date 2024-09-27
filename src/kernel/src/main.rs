@@ -3,7 +3,7 @@
 
 use core::{hint::spin_loop, panic::PanicInfo};
 
-use kernel::{println, riscv::registers::tp};
+use kernel::{arch::riscv::registers::tp, println};
 
 const BANNER: &str = "
     ██╗     ███████╗███╗   ███╗ ██████╗ ███╗   ██╗       ██████╗ ███████╗

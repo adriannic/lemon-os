@@ -5,7 +5,7 @@ use core::{
     sync::atomic::{AtomicBool, Ordering},
 };
 
-use crate::riscv::registers::tp;
+use crate::arch::riscv::registers::tp;
 
 /// Makes sure the value it contains is only accessed in mutual exclusion.
 #[derive(Debug)]
